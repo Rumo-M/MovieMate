@@ -15,7 +15,7 @@ export default function Home() {
         setMovies(response.data.results);
       } catch (err) {
         console.error(err);
-        setError("Failed to load movies.");
+        setError("Failed to load movies. Check your API key.");
       } finally {
         setLoading(false);
       }
@@ -25,6 +25,7 @@ export default function Home() {
   }, []);
 
   if (loading) return <Loader />;
+
   if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
 
   return (
@@ -42,3 +43,4 @@ export default function Home() {
     </div>
   );
 }
+
