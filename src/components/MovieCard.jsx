@@ -13,9 +13,15 @@ export default function MovieCard({ movie }) {
       />
       <div className="p-2">
         <h3 className="text-white font-semibold text-lg truncate">{movie.title}</h3>
+
+        {/* Release Date and Rating */}
+        <p className="text-gray-300 text-sm mt-1">
+          {movie.release_date ? `Release: ${movie.release_date}` : "Release: N/A"} | ⭐ {movie.vote_average || "N/A"}
+        </p>
+
         <Link
           to={`/movie/${movie.id}`}
-          className="text-blue-400 text-sm hover:underline"
+          className="text-blue-400 text-sm hover:underline mt-1 block"
         >
           View Details
         </Link>
