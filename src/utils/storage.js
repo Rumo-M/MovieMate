@@ -13,3 +13,4 @@ export const removeFromWatchlist = (id) => {
   const updated = current.filter((m) => m.id !== id);
   localStorage.setItem("watchlist", JSON.stringify(updated));
 };
+
