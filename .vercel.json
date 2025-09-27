@@ -1,6 +1,6 @@
 {
   "build": {
-    "command": "npx vite build",
+    "command": "npm ci && vite build",
     "outputDirectory": "dist",
     "env": {
       "NODE_VERSION": "22",
