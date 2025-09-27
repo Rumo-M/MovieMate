@@ -2,24 +2,26 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import Loader from "../components/Loader";
 import api from "../utils/api";
+import mockMovies from "../utils/mockMovies"; // fallback mock data
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchTrending = async () => {
       try {
-        console.log("API KEY from .env:", import.meta.env.VITE_TMDB_API_KEY);
-
         const response = await api.get("/trending/movie/week");
-        console.log("API Response:", response.data);
-
-        setMovies(response.data.results || []);
+        setMovies(response.data.results);
+        if (!response.data.results || response.data.results.length === 0) {
+          setError(true);
+        }
       } catch (err) {
-        console.log("API KEY:", import.meta.env.VITE_TMDB_API_KEY);
-
+        // Fallback to mock movies and set error
+        setMovies(mockMovies);
+        setError(true);
+      } finally {
         setLoading(false);
       }
     };
@@ -29,17 +31,16 @@ export default function Home() {
 
   if (loading) return <Loader />;
 
-  if (error) {
-    return (
-      <p className="text-red-500 text-center mt-10 text-lg font-semibold">
-        {error}
-      </p>
-    );
-  }
-
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Trending Movies 🎬</h2>
+
+      {error && (
+        <p className="text-center text-gray-400 mb-4">
+          Failed to load movies from API. Showing mock movies.
+        </p>
+      )}
+
       {movies.length === 0 ? (
         <p className="text-center text-gray-400">No trending movies found.</p>
       ) : (
