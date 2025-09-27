@@ -1,9 +1,10 @@
 {
   "build": {
-    "env": {
-      "NODE_VERSION": "22"
-    },
     "command": "npx vite build",
-    "outputDirectory": "dist"
+    "outputDirectory": "dist",
+    "env": {
+      "NODE_VERSION": "22",
+      "VITE_TMDB_API_KEY": "your_api_key_here"
+    }
   }
 }
