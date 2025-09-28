@@ -38,14 +38,12 @@ export default function MovieDetail() {
         setMovie(response.data);
       } catch (err) {
         console.warn("API failed, using mock movie:", err);
-        // fallback to mock movie
         const mock = mockMovies.find((m) => m.id === parseInt(id));
         setMovie(mock || null);
       } finally {
         setLoading(false);
       }
     };
-
     fetchMovie();
   }, [id]);
 
@@ -53,27 +51,30 @@ export default function MovieDetail() {
 
   if (!movie)
     return (
-      <p className="text-center text-red-500 mt-10">
-        Movie not found.
-      </p>
+      <p className="text-center text-red-500 mt-10">Movie not found.</p>
     );
 
-  // Determine poster URL with fallback
+  // Fallback for missing poster
   const posterURL = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : "/images/fallback.png"; // Make sure this exists in public/images
+    : "/assets/fallback-poster.jpg"; // Add a default poster in src/assets
 
   return (
     <div className="p-4 max-w-5xl mx-auto">
-      <Link to="/" className="text-blue-400 hover:underline mb-4 inline-block">
+      <Link
+        to="/"
+        className="text-blue-400 hover:underline mb-4 inline-block"
+      >
         ← Back to Home
       </Link>
+
       <div className="flex flex-col md:flex-row gap-6">
         <img
           src={posterURL}
           alt={movie.title}
           className="w-full md:w-1/3 rounded-lg shadow-lg"
         />
+
         <div className="flex-1 text-white">
           <h2 className="text-3xl font-bold mb-2">{movie.title}</h2>
           <p className="text-gray-300 mb-2">
