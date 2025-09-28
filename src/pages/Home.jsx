@@ -31,6 +31,12 @@ export default function Home() {
 
   if (loading) return <Loader />;
 
+  // Filter out Titanic and Jurassic Park
+  const filteredMovies = movies.filter(
+    (movie) =>
+      movie.title !== "Titanic" && movie.title !== "Jurassic Park"
+  );
+
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Trending Movies 🎬</h2>
@@ -41,11 +47,11 @@ export default function Home() {
         </p>
       )}
 
-      {movies.length === 0 ? (
+      {filteredMovies.length === 0 ? (
         <p className="text-center text-gray-400">No trending movies found.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {movies.map((movie) => (
+          {filteredMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
