@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // Make sure this path matches your logo
+import logo from '../assets/moviemate_png.jpg'; // Use the logo you copied into assets
 
 function Header({ darkMode, toggleDarkMode }) {
   return (
