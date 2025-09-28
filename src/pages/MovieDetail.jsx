@@ -50,12 +50,18 @@ export default function MovieDetail() {
   }, [id]);
 
   if (loading) return <Loader />;
+
   if (!movie)
     return (
       <p className="text-center text-red-500 mt-10">
         Movie not found.
       </p>
     );
+
+  // Determine poster URL with fallback
+  const posterURL = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : "/images/fallback.png"; // Make sure this exists in public/images
 
   return (
     <div className="p-4 max-w-5xl mx-auto">
@@ -64,7 +70,7 @@ export default function MovieDetail() {
       </Link>
       <div className="flex flex-col md:flex-row gap-6">
         <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={posterURL}
           alt={movie.title}
           className="w-full md:w-1/3 rounded-lg shadow-lg"
         />
