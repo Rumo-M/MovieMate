@@ -26,7 +26,8 @@ Built with **React** and **Tailwind CSS**, it fetches movie data from the [TMDb 
 - **State Management:** React Hooks  
 - **API:** [TMDb API](https://www.themoviedb.org/)  
 - **HTTP Requests:** Axios  
-- **Icons & UI:** Heroicons / Lucide React  
+- **Icons & UI:** Heroicons / Lucide React
+- **Deployment:** Netlify  
 
 ---
 
